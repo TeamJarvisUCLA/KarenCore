@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<!-- <constant name="struts.action.extension" value="action"/> -->
+	<package name="default" extends="struts-default" namespace="/">
+		<interceptors>
+			<interceptor-stack name="obeStack">
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+
+		</interceptors>
+		<default-interceptor-ref name="obeStack" />
+		<default-action-ref name="secure"></default-action-ref>
+
+		<action name="karen" class="karen.core.struts2.filter.Filter">
+			<result name="success" type="redirect">index.zul</result>
+			<result name="error" type="redirect">login.zul</result>
+		</action>
+
+		<action name="secure">
+			<result name="success" type="redirectAction">
+				<param name="actionName">karen</param>
+			</result>
+		</action>
+	</package>
+</struts>
