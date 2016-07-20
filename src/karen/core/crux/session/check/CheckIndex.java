@@ -2,6 +2,7 @@ package karen.core.crux.session.check;
 
 import karen.core.crux.session.DataCenter;
 
+import org.zkoss.bind.annotation.Init;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Page;
@@ -22,7 +23,6 @@ public class CheckIndex extends SelectorComposer<Window> {
 
 	private static final long serialVersionUID = 2886508833829586781L;
 
-	
 	@Wire
 	Hlayout main;
 	@Wire
@@ -42,13 +42,13 @@ public class CheckIndex extends SelectorComposer<Window> {
 		if (navbar.isCollapsed()) {
 			sidebar.setSclass("side-nav fixed");
 			navbar.setCollapsed(false);
-//			calitem.setTooltip("calpp, position=end_center, delay=0");
+			// calitem.setTooltip("calpp, position=end_center, delay=0");
 			toggler.setIconSclass("z-icon-angle-double-left");
 			vlayout.setSclass("content-main");
 		} else {
 			sidebar.setSclass("sidebar sidebar-min");
 			navbar.setCollapsed(true);
-//			calitem.setTooltip("");
+			// calitem.setTooltip("");
 			toggler.setIconSclass("z-icon-angle-double-right");
 			vlayout.setSclass("content-main-min");
 		}
@@ -59,18 +59,12 @@ public class CheckIndex extends SelectorComposer<Window> {
 	@Override
 	public ComponentInfo doBeforeCompose(Page page, Component parent,
 			ComponentInfo compInfo) {
-		
+
 		if (DataCenter.getUserSecurityData() == null) {
-			Executions.sendRedirect("login.zul");
+			Executions.sendRedirect("main.zul");
 			return null;
 		}
-		if (DataCenter.getPerfil() == null || DataCenter.getPerfil().getIdPerfil() == null) {
-			Executions.sendRedirect("perfil.zul");
-			return null;
-		}
-		
+		DataCenter.updateSrcPageContent(null, null, "/views/desktop/prueba.zul");
 		return super.doBeforeCompose(page, parent, compInfo);
 	}
-	
-	
 }

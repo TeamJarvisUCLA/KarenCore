@@ -24,20 +24,23 @@ import org.zkoss.zkmax.zul.Navitem;
 public class NavbarSidebar extends Navbar implements AfterCompose {
 
 	private static final long serialVersionUID = -2560087684299584265L;
-	
+
 	private static final String BREADCRUMBS = "breadcrumbs";
 
 	public void afterCompose() {
 		this.getChildren().clear();
 
-		PayloadNodoMenuResponse payloadNodoMenu =
-				new NodoMenuService().consultarNodoMenuPorRoles(DataCenter.getUserSecurityData().getIdRoles());
-		
-		if (!(Boolean) payloadNodoMenu.getInformacion(IPayloadResponse.IS_OK)) {
+		PayloadNodoMenuResponse payloadNodoMenu = new NodoMenuService()
+				.consultarNodoMenuPorRoles(DataCenter.getUserSecurityData()
+						.getIdRoles());
+
+		if (!(Boolean) payloadNodoMenu.getInformacion(IPayloadResponse.IS_OK)
+				|| payloadNodoMenu.getObjetos() == null
+				|| payloadNodoMenu.getObjetos().size() == 0) {
 			Alert.showMessage(payloadNodoMenu);
 			return;
 		}
-		
+
 		createTree(payloadNodoMenu.getObjetos().get(0));
 	}
 
@@ -46,30 +49,32 @@ public class NavbarSidebar extends Navbar implements AfterCompose {
 		public void onEvent(Event event) throws UiException {
 			if (event.getTarget() instanceof Navitem) {
 				Navitem navitem = (Navitem) event.getTarget();
-				
+
 				String breadcrumbs = (String) navitem.getAttribute(BREADCRUMBS);
-				
+
 				String[] breads = breadcrumbs.split(":");
-				
+
 				List<String> breadcrumbsList = new ArrayList<String>();
-				
+
 				for (String bread : breads) {
 					breadcrumbsList.add(bread);
 				}
-				
+
 				Breadcrumbs.updateBreads(breadcrumbsList);
-				
+
 				Alert.hideMessage();
-				
-				DataCenter.updateSrcPageContent((NodoMenu) navitem.getAttribute("zul"));
+
+				DataCenter.updateSrcPageContent((NodoMenu) navitem
+						.getAttribute("zul"));
 			}
 		}
 	};
 
 	public void createTree(NodoMenu root) {
 		for (NodoMenu nodoMenu : root.getHijos()) {
-			
-			if (nodoMenu.getTipoNodoMenuEnum().equals(TipoNodoMenuEnum.TRANSACCION)) {
+
+			if (nodoMenu.getTipoNodoMenuEnum().equals(
+					TipoNodoMenuEnum.TRANSACCION)) {
 				createNodoMenu(this, nodoMenu);
 				continue;
 			}
@@ -82,7 +87,7 @@ public class NavbarSidebar extends Navbar implements AfterCompose {
 	public Navbar createNodoMenu(Navbar navbar, NodoMenu nodoMenu) {
 		Navitem navitem = new Navitem();
 		navitem.setAttribute(BREADCRUMBS, "");
-		
+
 		navitem.setLabel(nodoMenu.getNombre());
 		navitem.setIconSclass(nodoMenu.getFkIconSclass().getNombre());
 		navitem.setAttribute("zul", nodoMenu);
@@ -98,12 +103,11 @@ public class NavbarSidebar extends Navbar implements AfterCompose {
 	public Nav createNodoMenu(Nav nav, NodoMenu nodoMenu) {
 		Navitem navitem = new Navitem();
 		navitem.setAttribute(BREADCRUMBS, nav.getAttribute(BREADCRUMBS));
-		
+
 		navitem.setLabel(nodoMenu.getNombre());
 		navitem.setSclass("waves-effect waves-light");
 		navitem.setIconSclass(nodoMenu.getFkIconSclass().getNombre());
 		navitem.setAttribute("zul", nodoMenu);
-		
 
 		navitem.addEventListener(Events.ON_CLICK, selectListener);
 
@@ -116,13 +120,14 @@ public class NavbarSidebar extends Navbar implements AfterCompose {
 		Nav nav = new Nav(nodoMenuPadre.getNombre());
 		nav.setClass("waves-effect waves-light");
 		nav.setAttribute(BREADCRUMBS, nodoMenuPadre.getNombre());
-		
+
 		nav.setIconSclass(nodoMenuPadre.getFkIconSclass().getNombre());
 
 		navbar.getChildren().add(nav);
 
 		for (NodoMenu nodoMenuHijo : nodoMenuPadre.getHijos()) {
-			if (nodoMenuHijo.getTipoNodoMenuEnum().equals(TipoNodoMenuEnum.TRANSACCION)) {
+			if (nodoMenuHijo.getTipoNodoMenuEnum().equals(
+					TipoNodoMenuEnum.TRANSACCION)) {
 				createNodoMenu(nav, nodoMenuHijo);
 				continue;
 			}
@@ -136,14 +141,16 @@ public class NavbarSidebar extends Navbar implements AfterCompose {
 	public Nav createFolder(Nav nav, NodoMenu nodoMenuPadre) {
 		Nav navFolder = new Nav(nodoMenuPadre.getNombre());
 		navFolder.setSclass("waves-effect waves-light");
-		navFolder.setAttribute(BREADCRUMBS, nav.getAttribute(BREADCRUMBS) + ":" + nodoMenuPadre.getNombre());
-		
+		navFolder.setAttribute(BREADCRUMBS, nav.getAttribute(BREADCRUMBS) + ":"
+				+ nodoMenuPadre.getNombre());
+
 		navFolder.setIconSclass(nodoMenuPadre.getFkIconSclass().getNombre());
 
 		nav.getChildren().add(navFolder);
 
 		for (NodoMenu nodoMenuHijo : nodoMenuPadre.getHijos()) {
-			if (nodoMenuHijo.getTipoNodoMenuEnum().equals(TipoNodoMenuEnum.TRANSACCION)) {
+			if (nodoMenuHijo.getTipoNodoMenuEnum().equals(
+					TipoNodoMenuEnum.TRANSACCION)) {
 				createNodoMenu(navFolder, nodoMenuHijo);
 				continue;
 			}

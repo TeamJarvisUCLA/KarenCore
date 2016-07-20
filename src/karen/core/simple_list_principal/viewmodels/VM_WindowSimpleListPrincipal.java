@@ -4,7 +4,6 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import karen.core.crux.session.DataCenter;
 import karen.core.dialog.generic.enums.DialogActionEnum;
@@ -27,16 +26,7 @@ public abstract class VM_WindowSimpleListPrincipal<T> {
 
 	protected T selectedObject;
 	
-	private Map<OperacionEnum, Boolean> isScheduleds;
-	
 	private C_WindowSimpleListPrincipal<T> controllerWindowSimpleListPrincipal;
-	
-	public Boolean isScheduled(OperacionEnum operacionEnum) {
-		if (isScheduleds.containsKey(operacionEnum)) {
-			return isScheduleds.get(operacionEnum);
-		}
-		return false;
-	}
 	
 	public String isValidPreconditionsIncluir() {
 		return "";
@@ -174,6 +164,10 @@ public abstract class VM_WindowSimpleListPrincipal<T> {
 		//NOTHING OK!
 	}
 	
+	public void executeCustom5() {
+		//NOTHING OK!
+	}
+	
 	/**
 	 * No puede ser usado en el @Init
 	 */
@@ -235,14 +229,6 @@ public abstract class VM_WindowSimpleListPrincipal<T> {
 		this.controllerWindowSimpleListPrincipal = controllerWindowSimpleListPrincipal;
 	}
 
-	public Map<OperacionEnum, Boolean> getIsScheduleds() {
-		return isScheduleds;
-	}
-
-	public void setIsScheduleds(Map<OperacionEnum, Boolean> isScheduleds) {
-		this.isScheduleds = isScheduleds;
-	}
-
 	public void doDelete() {
 		// NOTHING OK!
 	}
@@ -250,6 +236,4 @@ public abstract class VM_WindowSimpleListPrincipal<T> {
 	public abstract String getSrcFileZulForm(OperacionEnum operacionEnum);
 	
 	public abstract IPayloadResponse<T> getDataToTable(Integer cantidadRegistrosPagina, Integer pagina);
-	
-	public abstract Map<OperacionEnum, Boolean> getScheduledsTo();
 }

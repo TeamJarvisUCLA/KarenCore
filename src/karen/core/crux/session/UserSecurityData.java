@@ -1,6 +1,5 @@
 package karen.core.crux.session;
 
-import lights.seguridad.dto.Perfil;
 import lights.seguridad.dto.Usuario;
 
 public class UserSecurityData {
@@ -51,16 +50,5 @@ public class UserSecurityData {
 
 	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
-	}
-
-	public Perfil getPerfil() {
-		if (usuario == null) {
-			return null;
-		}
-		return usuario.getFkPerfil();
-	}
-
-	public void setPerfil(Perfil perfil) {
-		usuario.setFkPerfil(perfil);
 	}
 }

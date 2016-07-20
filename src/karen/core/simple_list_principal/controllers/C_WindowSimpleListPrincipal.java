@@ -36,7 +36,7 @@ public class C_WindowSimpleListPrincipal<T> extends Window implements AfterCompo
 	protected ListFoot listFoot;
 	private C_WindowSimpleListPrincipal me;
 	
-	protected Listbox lstbox;
+	protected Listbox listbox;
 	
 	public static final Integer CANTIDAD_REGISTROS_PAGINA_DEFECTO = 10;
 
@@ -112,11 +112,9 @@ public class C_WindowSimpleListPrincipal<T> extends Window implements AfterCompo
 				toolbar.createButtons(operaciones);
 			}
 			
-			if (lstbox != null) {
+			if (listbox != null) {
 				updateListBoxAndFooter();
 			}
-			
-			vm().setIsScheduleds(vm().getScheduledsTo());
 			
 			doOnClientToInitPrincipal();
 		}
@@ -186,14 +184,9 @@ public class C_WindowSimpleListPrincipal<T> extends Window implements AfterCompo
 	
 	public void action(String nombreOperacion) {
 		try {
-			OperacionEnum operacionEnum = OperacionEnum.valueOf(nombreOperacion.toUpperCase());
+//			OperacionEnum operacionEnum = OperacionEnum.valueOf(nombreOperacion.toUpperCase());
 			
 			VM_WindowSimpleListPrincipal<T> viewModel = ((VM_WindowSimpleListPrincipal<T>) getAttributes().get("vm"));
-			
-			if (!viewModel.isScheduled(operacionEnum)) {
-				mostrarMensajeSinProgramar();
-				return;
-			}
 			
 			String isValidPreconditions = (String) viewModel.getClass().getMethod("isValidPreconditions" + nombreOperacion, new Class<?>[] {}).invoke(viewModel, new Object[] {});
 			
@@ -219,10 +212,6 @@ public class C_WindowSimpleListPrincipal<T> extends Window implements AfterCompo
 			
 			e.printStackTrace();
 		}
-	}
-
-	private void mostrarMensajeSinProgramar() {
-		Alert.showMessage("I:Information Code: 101-Funcion no programada. ");
 	}
 	
 	private void mostrarMensajeErrorInesperado() {

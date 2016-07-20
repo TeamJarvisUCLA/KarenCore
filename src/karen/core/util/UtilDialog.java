@@ -19,9 +19,9 @@ import org.zkoss.zk.ui.Executions;
 
 public class UtilDialog {
 	
-	private static String URL_MESSAGE_BOX_DIALOG = "resources/componentes/messageBoxGeneric.zul";
+	private static String URL_MESSAGE_BOX_DIALOG = "assets/theme/components/messageBoxGeneric.zul";
 	
-	private static String URL_MESSAGE_SYSTEM_DIALOG = "resources/componentes/messageSystem.zul";
+	private static String URL_MESSAGE_SYSTEM_DIALOG = "assets/theme/components/messageSystem.zul";
 	
 	public static void showDialog(String uri, DialogData dialogData) {
 		Map<String, Object> parameters = new HashMap<String, Object>();

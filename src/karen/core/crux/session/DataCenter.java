@@ -5,12 +5,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import karen.core.crux.center.Center;
 import karen.core.crux.session.listener_zk.MySessionListener;
 import karen.core.crux.session.thread.MessageSystemTask;
 import karen.core.util.UtilDialog;
 import lights.seguridad.dto.NodoMenu;
 import lights.seguridad.dto.Operacion;
-import lights.seguridad.dto.Perfil;
 import lights.seguridad.enums.OperacionEnum;
 
 import org.zkoss.bind.BindUtils;
@@ -30,6 +30,8 @@ public class DataCenter {
 	private static Map<String, UserSecurityData> usersSecurityData;
 	
 	private static String messageSystem;
+	
+	private static Center center;
 
     static {
     	usersData = new HashMap<String, UserData>();
@@ -207,20 +209,8 @@ public class DataCenter {
 		return usersSecurityData.get(getZkSession());
 	}
 	
-	public static Perfil getPerfil() {
-		return getUserSecurityData().getPerfil();
-	}
-	
 	public boolean getLogued() {
 		return getUserSecurityData() != null;
-	}
-	
-	public boolean getLoguedAndPerfilValid() {
-		return getUserSecurityData() != null && getPerfil().getIdPerfil() != null;
-	}
-	
-	public boolean getLoguedAndPerfilNotValid() {
-		return getUserSecurityData() != null && getPerfil().getIdPerfil() == null;
 	}
 	
 	public static void putDatoAdicional(String key, Object datoAdicional) {
@@ -250,5 +240,17 @@ public class DataCenter {
 	
 	public static String getEndPoint() {
 		return "http://localhost:8181/SmileWebService";
+	}
+
+	public void setCenter(Center center) {
+		DataCenter.center = center;
+	}
+	
+	public static void activeBlur() {
+		center.setSclass("blur_5");
+	}
+	
+	public static void removeBlur() {
+		center.setSclass(center.getSclass().replace("blur_5", ""));
 	}
 }

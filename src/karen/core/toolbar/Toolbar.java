@@ -71,4 +71,34 @@ public class Toolbar extends org.zkoss.zul.Toolbar {
 			}
 		}
 	}
+	
+	public void setSclassColorAUnBoton(Operacion operacion, String iconSclass) {
+		for (Component component : this.getChildren()) {
+			if (component instanceof ButtonToolbar) {
+				ButtonToolbar button = (ButtonToolbar) component;
+				
+				if (button.getOperacion().equals(operacion)) {
+					button.setSclass("btn-floating btn-small btn waves-effect waves-light " + iconSclass);
+					break;
+				}
+			}
+		}
+	}
+	
+	public void refrescarBoton(Operacion operacion) {
+		for (Component component : this.getChildren()) {
+			if (component instanceof ButtonToolbar) {
+				ButtonToolbar button = (ButtonToolbar) component;
+				
+				if (button.getOperacion().equals(operacion)) {
+					button.setOperacion(operacion);
+					button.setSclass("btn-floating btn-small btn waves-effect waves-light " + operacion.getFkSclass().getNombre());
+					button.setIconSclass(operacion.getFkIconSclass().getNombre());
+					button.setTooltiptext(operacion.getTooltiptext());
+					
+					break;
+				}
+			}
+		}
+	}
 }

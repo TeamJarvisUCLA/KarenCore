@@ -42,7 +42,7 @@ public class NavbarTop extends SelectorComposer<Component> {
 		try {
 			loadImage();
 		} catch (Exception e) {
-			UtilDialog.showMessageBoxError("Ha ocurrido un error al cargar la imágen");
+			UtilDialog.showMessageBoxError("Ha ocurrido un error al cargar la imagen");
 		}
 	}
 	
@@ -68,7 +68,7 @@ public class NavbarTop extends SelectorComposer<Component> {
 		SesionContextHelper.clear();
 		DataCenter.clear();
 		
-		Executions.sendRedirect("login.zul");
+		Executions.sendRedirect("main.zul");
 	}
 	
 	@Listen("onClick = #lblProfile")
@@ -90,7 +90,7 @@ public class NavbarTop extends SelectorComposer<Component> {
 							FileUtils.writeByteArrayToFile(
 									new File("/home/tranx6/CAJAFUERTE/Promo54/Imagenes/u_" + idUser), bytes);
 						} catch (IOException e) {
-							UtilDialog.showMessageBoxError("Ha ocurrido un error al guardar la imágen");
+							UtilDialog.showMessageBoxError("Ha ocurrido un error al guardar la imagen");
 						}
 					} else {
 						new File("/home/tranx6/CAJAFUERTE/Promo54/Imagenes/u_" + idUser).delete();
@@ -99,13 +99,13 @@ public class NavbarTop extends SelectorComposer<Component> {
 					try {
 						loadImage();
 					} catch (Exception e) {
-						UtilDialog.showMessageBoxError("Ha ocurrido un error al cargar la imágen");
+						UtilDialog.showMessageBoxError("Ha ocurrido un error al cargar la imagen");
 					}
 				}
 			}
 		});
 		
-		UtilDialog.showDialog("vista/changeImage.zul", dialogData);
+		UtilDialog.showDialog("views/changeImage.zul", dialogData);
 	}
 	
 	@Listen("onOpen = #taskpp")

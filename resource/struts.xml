@@ -18,7 +18,7 @@
 
 		<action name="karen" class="karen.core.struts2.filter.Filter">
 			<result name="success" type="redirect">index.zul</result>
-			<result name="error" type="redirect">login.zul</result>
+			<result name="error" type="redirect">main.zul</result>
 		</action>
 
 		<action name="secure">

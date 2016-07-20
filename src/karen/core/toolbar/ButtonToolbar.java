@@ -13,8 +13,8 @@ public class ButtonToolbar extends Button {
 	private Operacion operacion;
 	
 	private void initControl() {
-		setSclass("btn-floating btn-small btn waves-effect waves-light " + operacion.getSclass());
-		setIconSclass(operacion.getIconSclass());
+		setSclass("btn-floating btn-small btn waves-effect waves-light " + operacion.getFkSclass().getNombre());
+		setIconSclass(operacion.getFkIconSclass().getNombre());
 		setTooltiptext(operacion.getTooltiptext());
 	}
 	
@@ -33,5 +33,11 @@ public class ButtonToolbar extends Button {
 	public Operacion getOperacion() {
 		return operacion;
 	}
+
+	public void setOperacion(Operacion operacion) {
+		this.operacion = operacion;
+	}
+	
+	
 
 }
