@@ -2,7 +2,6 @@ package karen.core.crux.session.check;
 
 import karen.core.crux.session.DataCenter;
 
-import org.zkoss.bind.annotation.Init;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Page;

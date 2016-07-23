@@ -9,9 +9,9 @@ import karen.core.crux.center.Center;
 import karen.core.crux.session.listener_zk.MySessionListener;
 import karen.core.crux.session.thread.MessageSystemTask;
 import karen.core.util.UtilDialog;
-import lights.seguridad.dto.NodoMenu;
-import lights.seguridad.dto.Operacion;
-import lights.seguridad.enums.OperacionEnum;
+import ve.smile.seguridad.dto.NodoMenu;
+import ve.smile.seguridad.dto.Operacion;
+import ve.smile.seguridad.enums.OperacionEnum;
 
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;

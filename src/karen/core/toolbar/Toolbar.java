@@ -2,7 +2,7 @@ package karen.core.toolbar;
 
 import java.util.Collection;
 
-import lights.seguridad.dto.Operacion;
+import ve.smile.seguridad.dto.Operacion;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;

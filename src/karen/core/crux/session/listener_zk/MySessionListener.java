@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import karen.core.crux.session.DataCenter;
 import karen.core.crux.session.thread.MessageSystemTask;
-import lights.seguridad.consume.services.SesionService;
+import ve.smile.seguridad.consume.services.SesionService;
 
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.WebApp;

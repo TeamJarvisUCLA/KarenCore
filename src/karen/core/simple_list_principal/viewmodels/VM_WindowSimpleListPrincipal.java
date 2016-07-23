@@ -14,9 +14,9 @@ import karen.core.simple_list_principal.controllers.C_WindowSimpleListPrincipal;
 import karen.core.util.UtilDialog;
 import karen.core.util.payload.UtilPayload;
 import lights.core.payload.response.IPayloadResponse;
-import lights.seguridad.dto.Operacion;
-import lights.seguridad.enums.OperacionEnum;
-import lights.seguridad.enums.helper.OperacionHelper;
+import ve.smile.seguridad.dto.Operacion;
+import ve.smile.seguridad.enums.OperacionEnum;
+import ve.smile.seguridad.enums.helper.OperacionHelper;
 
 import org.zkoss.bind.BindUtils;
 

@@ -13,7 +13,7 @@ import karen.core.dialog.generic.enums.DialogActionEnum;
 import karen.core.dialog.generic.events.DialogCloseEvent;
 import karen.core.dialog.generic.events.listeners.DialogCloseListener;
 import karen.core.util.UtilDialog;
-import lights.seguridad.consume.services.SesionService;
+import ve.smile.seguridad.consume.services.SesionService;
 
 import org.apache.commons.io.FileUtils;
 import org.zkoss.zk.ui.Component;

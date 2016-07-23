@@ -1,6 +1,6 @@
 package karen.core.crux.session;
 
-import lights.seguridad.dto.Usuario;
+import ve.smile.seguridad.dto.Usuario;
 
 public class UserSecurityData {
 	

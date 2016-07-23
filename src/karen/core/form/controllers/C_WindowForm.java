@@ -12,8 +12,8 @@ import karen.core.listfoot.ListFoot;
 import karen.core.toolbar.Toolbar;
 import karen.core.util.payload.UtilPayload;
 import lights.core.payload.response.IPayloadResponse;
-import lights.seguridad.dto.Operacion;
-import lights.seguridad.enums.OperacionEnum;
+import ve.smile.seguridad.dto.Operacion;
+import ve.smile.seguridad.enums.OperacionEnum;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;

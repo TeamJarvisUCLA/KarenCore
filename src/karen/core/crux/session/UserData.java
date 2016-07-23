@@ -3,10 +3,10 @@ package karen.core.crux.session;
 import java.util.HashMap;
 import java.util.Map;
 
-import lights.seguridad.dto.NodoMenu;
-import lights.seguridad.dto.Operacion;
-import lights.seguridad.enums.OperacionEnum;
-import lights.seguridad.enums.helper.OperacionHelper;
+import ve.smile.seguridad.dto.NodoMenu;
+import ve.smile.seguridad.dto.Operacion;
+import ve.smile.seguridad.enums.OperacionEnum;
+import ve.smile.seguridad.enums.helper.OperacionHelper;
 
 public class UserData {
 
