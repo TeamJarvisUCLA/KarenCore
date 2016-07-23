@@ -63,7 +63,6 @@ public class CheckIndex extends SelectorComposer<Window> {
 			Executions.sendRedirect("main.zul");
 			return null;
 		}
-		DataCenter.updateSrcPageContent(null, null, "/views/desktop/prueba.zul");
 		return super.doBeforeCompose(page, parent, compInfo);
 	}
 }

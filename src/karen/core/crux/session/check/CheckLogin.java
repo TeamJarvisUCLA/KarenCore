@@ -18,7 +18,6 @@ public class CheckLogin extends SelectorComposer<Window> {
 			ComponentInfo compInfo) {
 		
 		if (DataCenter.getUserSecurityData() != null) {
-			DataCenter.updateSrcPageContent(null, null, "/views/desktop/prueba.zul");
 			Executions.sendRedirect("index.zul");
 			return null;
 		}
