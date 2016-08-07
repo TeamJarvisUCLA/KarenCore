@@ -1,0 +1,212 @@
+package karen.core.simple_list_elements.controllers;
+
+import java.lang.reflect.InvocationTargetException;
+
+import karen.core.crux.alert.Alert;
+import karen.core.simple_list_elements.viewmodels.VM_WindowSimpleListElements;
+import karen.core.toolbar_pagination.ToolbarPagination;
+import karen.core.util.payload.UtilPayload;
+import lights.core.payload.response.IPayloadResponse;
+
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.event.ForwardEvent;
+import org.zkoss.zk.ui.ext.AfterCompose;
+import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zk.ui.util.ConventionWires;
+import org.zkoss.zul.Window;
+
+//import ve.smile.seguridad.dto.NodoMenu;
+//import ve.smile.seguridad.dto.Operacion;
+//import ve.smile.seguridad.enums.OperacionEnum;
+
+@SuppressWarnings({"unchecked","rawtypes"})
+public class C_WindowSimpleListElements<T> extends Window implements AfterCompose {
+
+	private static final long serialVersionUID = 1277148899732272894L;
+
+//	protected ToolbarPagination toolbarPagination;
+	protected ToolbarPagination toolbarPagination;
+	private C_WindowSimpleListElements me;
+	
+//	protected Listbox listbox;
+	
+	public static final Integer CANTIDAD_REGISTROS_PAGINA_DEFECTO = 2;
+
+	public C_WindowSimpleListElements() {
+		super();
+		me = this;
+		this.addEventListener("onCreate", eventListenerControllerWindowSimpleListElements);
+	}
+	
+	@Override
+	public void afterCompose() {
+		ConventionWires.wireVariables(this, this);
+		ConventionWires.addForwards(this, this);
+	}
+
+	protected EventListener eventListenerControllerWindowSimpleListElements = new EventListener() {
+		public void onEvent(Event event) throws Exception {
+			vm().setControllerWindowSimpleListElements(me);
+
+//			NodoMenu nodoMenu = DataCenter.getNodoMenu();
+			
+//			if (nodoMenu == null) {
+//				return;
+//			}
+			
+//			Usuario currentUser = getCurrentUser();
+
+//			if (currentUser == null) { TODO REMOVER COOMENTARIOS
+//				return;
+//			}
+
+//			PayloadOperacionResponse payloadOperacion = 
+//					new OperacionService().consultarByNodoMenuAndRoles(nodoMenu.getIdNodoMenu(), DataCenter.getUserSecurityData().getIdRoles());
+//			
+//			if (!UtilPayload.isOK(payloadOperacion)) {
+//				Alert.showMessage(payloadOperacion);
+//				return;
+//			}
+			
+//			List<Operacion> operaciones = payloadOperacion.getObjetos();
+			
+//			List<Operacion> operaciones = new ArrayList<Operacion>();
+//			List<Rol> roles = SesionContextHelper.getRolesActuales();
+//			
+//			for (Rol rol : roles) {
+//				PayloadPermisoSeguridadResponse payloadPermisoSeguridad = PermisoSeguridadService.consultarPermisoSeguridadPorCriterios(-1, nodoMenu.getIdNodoMenu(), rol.getIdRol(), -1);
+//				
+//				if (!"OK".equals(payloadPermisoSeguridad.getInformacion("resultado"))) {
+//					mostrarMensaje(payloadPermisoSeguridad);
+//					continue;
+//				}
+//				
+//				List<PermisoSeguridad> permisos = payloadPermisoSeguridad.getObjetos();
+//				
+//				if (permisos.size() != 0) {//PARA LAS CLASES OPERACIONES, COLOCAR EL ESTILO CORRECTO. (CUSTOM O NORMAL)TODO
+//					
+//					for (PermisoSeguridad permisoSeguridad : permisos) {
+//						Operacion o = OperacionHelper.getPorId(permisoSeguridad.getOperacion());
+//						
+//						if (!operaciones.contains(o)) {
+//							operaciones.add(o);
+//						}
+//						
+//					}
+//					
+//					continue;
+//				}
+//				
+//			}
+
+//			if (toolbarPagination != null) {
+//				Collections.sort(operaciones);
+//				toolbarPagination.createButtons(operaciones);
+//			}
+			
+//			if (listbox != null) {
+				updateListBoxAndFooter();
+//			}
+			
+			doOnClientToInitPrincipal();
+		}
+	};
+	
+	public void updateListBoxAndFooter() {
+	
+		updateListAndFooter(1);
+	}
+	
+	public void updateListAndFooter(Integer page) {
+		IPayloadResponse<T> iPayload = vm().updateListBox(page);
+		
+		if (!UtilPayload.isOK(iPayload)) {
+			Alert.showMessage(iPayload);
+			updateToolbarPagination(null);
+			return;
+		}
+
+		updateToolbarPagination(iPayload);
+	}
+
+	public void onClickPaginacion$toolbarPagination(Event event) throws InterruptedException {
+		if (!(event instanceof ForwardEvent)) {
+			return;
+		}
+		
+		ForwardEvent forwardEvent = (ForwardEvent) event;
+
+		Integer page = (Integer) forwardEvent.getOrigin().getData();
+		
+		updateListAndFooter(page);
+	}
+	
+	public void doOnClientToInitPrincipal() {
+		Clients.evalJavaScript("jq('.btn-floating.btn-small').hover(function(){jq(this).addClass(\"lighten-2\");},function(){jq(this).removeClass(\"lighten-2\");})");
+	}
+	
+	public void updateToolbarPagination(IPayloadResponse<T> iPayload) {
+		if (toolbarPagination != null) {
+			toolbarPagination.updateFooter(iPayload);
+		}
+	}
+	
+//	public void onSelectButtonToolbar$toolbar(Event event) throws InterruptedException {
+//		if (!(event instanceof ForwardEvent)) {
+//			return;
+//		}
+//
+//		ForwardEvent forwardEvent = (ForwardEvent) event;
+//
+//		Operacion operacion = (Operacion) forwardEvent.getOrigin().getData();
+//		
+//		try {
+//			this.getClass().getMethod("action", String.class).invoke(this,
+//					OperacionEnum.values()[operacion.getIdOperacion()].toString());
+//		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
+//				| InvocationTargetException e) {
+//			e.printStackTrace();
+//		}
+//	}
+//	
+	public void action(String nombreOperacion) {
+		try {
+//			OperacionEnum operacionEnum = OperacionEnum.valueOf(nombreOperacion.toUpperCase());
+			
+			VM_WindowSimpleListElements<T> viewModel = ((VM_WindowSimpleListElements<T>) getAttributes().get("vm"));
+			
+			String isValidPreconditions = (String) viewModel.getClass().getMethod("isValidPreconditions" + nombreOperacion, new Class<?>[] {}).invoke(viewModel, new Object[] {});
+			
+			if (!isValidPreconditions.equals("")) {
+				Alert.showMessage(isValidPreconditions);
+				return;
+			}
+			
+			String isValidSearchData = (String) viewModel.getClass().getMethod("isValidSearchData" + nombreOperacion, new Class<?>[] {}).invoke(viewModel, new Object[] {});
+			
+			if (!isValidSearchData.equals("")) {
+				Alert.showMessage(isValidSearchData);
+				return;
+			}
+			
+			Alert.hideMessage();
+			
+			viewModel.getClass().getMethod("execute" + nombreOperacion, new Class<?>[] {}).invoke(viewModel, new Object[] {});
+			
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			mostrarMensajeErrorInesperado();
+			
+			e.printStackTrace();
+		}
+	}
+	
+	private void mostrarMensajeErrorInesperado() {
+		Alert.showMessage("E:Error Code: 101-Ha ocurrido un error inesperado. ");
+	}
+	
+	public VM_WindowSimpleListElements<T> vm() {
+		return ((VM_WindowSimpleListElements<T>) getAttributes().get("vm"));
+	}
+}
