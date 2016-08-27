@@ -46,8 +46,14 @@ public class UtilValidate {
 		validateNullOrEmpty(value, nombre);
 		
 		if (!validateOperator.compare(value, valueToCompare)) {
-			throw new Exception("E: Error Code: 098-El valor del campo <b>" + nombre + "</b> debe ser " + validateOperator.getErrorMessage() + " " + valueToCompare);
+			throw new Exception("E: Error Code: 100-El valor del campo <b>" + nombre + "</b> debe ser " + validateOperator.getErrorMessage() + " " + valueToCompare);
 		}
+	}
+	
+	public static void validateNull(Object value, String nombre) throws Exception {
+		if (value == null) {
+			throw new Exception("E: Error Code: 099-Debe suministrar el valor del campo <b>" + nombre + "</b>");
+		}	
 	}
 	
 	/**
