@@ -2,9 +2,8 @@ package karen.core.util.validate;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.util.List;
 import karen.core.util.UtilDateTime;
-
 import org.exolab.castor.types.DateTime;
 
 public class UtilValidate {
@@ -103,7 +102,11 @@ public class UtilValidate {
 			}
 		}
 	}
-	
+	public static <T> void validateList(List<T> lista, String nombre) throws Exception {
+		if (lista == null || lista.isEmpty()) {
+			throw new Exception("E: Error Code: 099-No existen datos en la <b>" + nombre + "</b>");
+		}	
+	}
 //	DateTime dt = new DateTime( "2010-01-01T12:00:00+01:00" ) ;
 	
 //	long timeInLong=System.currentTimeMillis();
