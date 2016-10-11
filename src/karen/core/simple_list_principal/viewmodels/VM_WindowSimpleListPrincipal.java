@@ -131,7 +131,7 @@ public abstract class VM_WindowSimpleListPrincipal<T> {
 	}
 	
 	public void executeEliminar() {	
-		UtilDialog.showMessageBoxConfirmation("Â¿Desea eliminar el registro seleccionado?", new MessageBoxDialogCloseListener() {
+		UtilDialog.showMessageBoxConfirmation("¿Desea eliminar el registro seleccionado?", new MessageBoxDialogCloseListener() {
 			
 			@Override
 			public void onClose(MessageBoxDialogCloseEvent messageBoxDialogCloseEvent) {

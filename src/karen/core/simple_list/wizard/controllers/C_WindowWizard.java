@@ -59,10 +59,6 @@ public class C_WindowWizard<T> extends Window implements AfterCompose {
 
 			restartWizard();
 
-			if (listbox != null) {
-				updateListBoxAndFooter();
-			}
-
 			doOnClientToInitPrincipal();
 		}
 	};
@@ -97,6 +93,7 @@ public class C_WindowWizard<T> extends Window implements AfterCompose {
 
 	public void onClickPaginacion$listFoot(Event event)
 			throws InterruptedException {
+		System.out.println("event");
 		if (!(event instanceof ForwardEvent)) {
 			return;
 		}
@@ -189,6 +186,7 @@ public class C_WindowWizard<T> extends Window implements AfterCompose {
 		}
 
 		updateButtonsAndSrcPageContent();
+		updateListBoxAndFooter();
 	}
 
 	public void onSelectButtonWizard$divButtonsWizard(Event event)
