@@ -11,28 +11,28 @@ import ve.smile.seguridad.enums.helper.OperacionHelper;
 public class UserData {
 
 	private String srcPageContent;
-	
+
 	private NodoMenu nodoMenu;
-	
+
 	private Object entity;
-	
+
 	private Operacion operacion;
-	
+
 	private Map<String, Object> datosAdicionales;
-	
+
 	private String ip;
-	
+
 	private String title;
-	
+
 	public UserData() {
 		super();
 		datosAdicionales = new HashMap<String, Object>();
 		title = "";
 	}
-	
+
 	public UserData(String ip) {
 		this();
-		
+
 		this.ip = ip;
 	}
 
@@ -78,11 +78,11 @@ public class UserData {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	
+
 	public void put(String key, Object datoAdicional) {
 		datosAdicionales.put(key, datoAdicional);
 	}
-	
+
 	public Object get(String key) {
 		return datosAdicionales.get(key);
 	}
@@ -94,4 +94,5 @@ public class UserData {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 }
